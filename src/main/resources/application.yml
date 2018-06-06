@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/dbgirl?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update  # 第一次简表create  后面用update
+    show-sql: true
+
+#通过配置mybatis.mapper-locations来指明mapper的xml文件存放位置，
+#mybatis.type-aliases-package来指明和数据库映射的实体的所在包。
+#  mybatis:
+#    mapper-locations:
+#      classpath*: mybatis/*Mapper.xml
+#    type-aliases-package: com.forezp.entity
