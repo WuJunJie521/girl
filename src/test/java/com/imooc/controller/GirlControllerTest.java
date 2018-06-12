@@ -10,6 +10,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
  * java类简单作用描述
  *
@@ -39,5 +43,29 @@ public class GirlControllerTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    static List<Integer> list = new ArrayList<Integer>();
+
+    public static int getNumber()
+    {
+        Random ran = new Random();
+        int a = ran.nextInt(20);
+        for(int x:list)
+        {
+            if(x==a)
+                return getNumber();
+        }
+        list.add(a);
+        return a;
+    }
+    public static void main(String[] args) {
+
+        for(int i=0;i<10;i++)
+        {
+            System.out.print(getNumber()+" ");
+        }
+
     }
 }
