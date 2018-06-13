@@ -2,7 +2,6 @@ package com.imooc.controller;
 
 import com.imooc.domain.Girl;
 import com.imooc.domain.Result;
-import com.imooc.repository.GirlRepository;
 import com.imooc.service.GirlService;
 import com.imooc.utils.ResultUtil;
 import org.slf4j.Logger;
@@ -28,12 +27,7 @@ import java.util.List;
  */
 @RestController
 public class GirlController {
-
     private final static Logger LOGGER = LoggerFactory.getLogger(GirlController.class);
-
-
-    @Autowired
-    private GirlRepository girlRepository;
 
     @Autowired
     private GirlService girlService;
@@ -48,7 +42,7 @@ public class GirlController {
     @GetMapping(value = "/girls")
     public List<Girl> girlList(){
         LOGGER.info("girlList");
-        return girlRepository.findAll();
+        return girlService.findAll();
     }
 
     /**
@@ -67,7 +61,7 @@ public class GirlController {
         girl.setCupSize(girl.getCupSize());
         girl.setAge(girl.getAge());
 
-        return ResultUtil.success(girlRepository.save(girl));
+        return ResultUtil.success(girlService.saveGirl(girl));
     }
 
     /**
@@ -79,7 +73,7 @@ public class GirlController {
     */
     @GetMapping(value = "/girls/{id}")
     public Girl girlFindOne(@PathVariable("id") Integer id){
-        return girlRepository.findById(id).get();
+        return girlService.findById(id);
     }
 
     /**
@@ -97,7 +91,7 @@ public class GirlController {
         girl.setId(id);
         girl.setCupSize(cupSize);
         girl.setAge(age);
-        return girlRepository.save(girl);
+        return girlService.updateGirl(girl);
     }
 
     //删除
@@ -107,12 +101,12 @@ public class GirlController {
 //        解决办法：
 //        1、在Service层加@Transactional
 //        2、在Repository层加@Modifying
-        girlRepository.deleteById(id);
+        girlService.delGirl(id);
     }
 
     @GetMapping(value = "/girls/age/{age}")
     public List<Girl> girlListByAge(@PathVariable("age") Integer age){
-        return girlRepository.findByAge(age);
+        return girlService.findByAge(age);
     }
 
     @PostMapping(value = "/girls/two")

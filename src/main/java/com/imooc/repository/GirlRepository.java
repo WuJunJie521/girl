@@ -2,6 +2,7 @@ package com.imooc.repository;
 
 import com.imooc.domain.Girl;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  * <p>
  * Copyright: Copyright (c) 2018
  */
-public interface GirlRepository extends JpaRepository<Girl,Integer> {
+public interface GirlRepository extends JpaRepository<Girl,Integer> ,JpaSpecificationExecutor<Girl> {
 
     /**
      * 根据年龄查询

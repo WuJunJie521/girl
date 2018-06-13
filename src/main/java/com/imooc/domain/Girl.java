@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.Min;
 
 /**
- * java类简单作用描述
+ * 女孩实体类
  *
  * @ProjectName: girl
  * @Package: com.imooc

@@ -1,12 +1,8 @@
 package com.imooc.service;
 
 import com.imooc.domain.Girl;
-import com.imooc.enums.ResultEnum;
-import com.imooc.exception.GirlException;
-import com.imooc.repository.GirlRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Transient;
-import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * java类简单作用描述
@@ -20,47 +16,57 @@ import org.springframework.stereotype.Service;
  * <p>
  * Copyright: Copyright (c) 2018
  */
-@Service
-public class GirlService {
+public interface GirlService {
 
-    @Autowired
-    private GirlRepository girlRepository;
+    /**
+     * 查询所有女孩
+     * @return
+     */
+    public List<Girl> findAll();
 
-    @Transient
-    public void insertTwo(){
-        Girl girlA = new Girl();
-        girlA.setCupSize("A");
-        girlA.setAge(38);
-        girlRepository.save(girlA);
+    /**
+     * 添加女孩
+     * @param girl
+     */
+    public Girl saveGirl(Girl girl);
 
-        Girl girlB = new Girl();
-        girlB.setCupSize("B");
-        girlB.setAge(39);
-        girlRepository.save(girlB);
-    }
+    /**
+     * 根据id删除女孩
+     * @param id
+     */
+    public void delGirl(Integer id);
 
-    public void getAge(Integer id) throws Exception{
-        Girl girl = girlRepository.getOne(id);
-        Integer age = girl.getAge();
-        if (age < 10){
-            //返回"你还在上小学"    code=100
-            throw new GirlException(ResultEnum.PRIMARY_SCHOOL);
-        }else if (age > 10 && age < 16){
-            //返回"你可能在上初中吧"  code=101
-            throw new GirlException(ResultEnum.MIDDLE_SCHOOL);
-        }
-        //如果>16岁,加钱
-        //....
-    }
+    /**
+     * 根据对象更新
+     * @param girl
+     * @return
+     */
+    public Girl updateGirl(Girl girl);
 
-    /** 
-    * @Description: 通过ID查询一个女生的信息 
-    * @Param: [id] 
-    * @return: com.imooc.domain.Girl 
-    * @Author: 武俊杰 
+    /**
+     * 添加2个女孩
+     */
+    public void insertTwo();
+
+    /**
+     * 根据ID获取年龄
+     * @param id
+     */
+    public void getAge(Integer id);
+
+    /**
+     * 根据年龄查询
+     * @param age   年龄
+     * @return
+     */
+    public List<Girl> findByAge(Integer age);
+
+    /**
+    * @Description: 通过ID查询一个女生的信息
+    * @Param: [id]
+    * @return: com.imooc.domain.Girl
+    * @Author: 武俊杰
     * @Date: 2018/6/1 19:41
     */
-    public Girl findById(Integer id) {
-        return girlRepository.findById(id).get();
-    }
+    public Girl findById(Integer id);
 }
